@@ -8,9 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class CollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var lostCharacters = ["Perdidos", "Friends", "Breaking Bad", "Dexter", "Futurama", "Los Soprano", "Mad Men", "House", "Anatomia de Grey", "24", "CSI", "Deadwood", "Expediente X", "Fringe", "Heroes", "Juego de Tronos", "Los Simpsons", "Doctor Who", "Modern Family", "Padre de Familia", "Prison Break", "South Park", "The Big Bang Theory", "The Walking Dead"]
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    let tvSeries = ["Ejemplo1", "Friends", "Breaking Bad", "Dexter", "Futurama", "Los Soprano", "Mad Men", "House", "Anatomia de Grey", "24", "CSI", "Deadwood", "Expediente X", "Fringe", "Heroes", "Juego de Tronos", "Los Simpsons", "Doctor Who", "Modern Family", "Padre de Familia", "Prison Break", "South Park", "The Big Bang Theory", "The Walking Dead"]
+    
+    let usuarios=["juan","pedro"]
+    let contraseñas=["1234","12345"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,29 +28,34 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return lostCharacters.count
+        return tvSeries.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let identifier = "Item"
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! LostCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! SeriesCollectionViewCell
         
-        cell.itemImage.image = UIImage.init(imageLiteralResourceName: lostCharacters[indexPath.row])
-        cell.itemLabel.text = lostCharacters[indexPath.row]
+        cell.itemLabel.text = tvSeries[indexPath.row]
+        cell.itemImage.image = UIImage.init(imageLiteralResourceName: tvSeries[indexPath.row])
         
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "goToDetail", sender: self)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier = "goToDetail" {
-            guard let 
+        let item = sender as? UICollectionViewCell
+        let indexPath = collectionView.indexPath(for: item!)
+        let detailVC = segue.destination as! DetailViewController
+        detailVC.detailName = tvSeries[(indexPath?.row)!]
+        
+        var c = 0
+        for (item) in usuarios{
+            if item == useTxt.text  && contraseñas[c]== pwdText.text{
+            }
+            c = c+1
         }
+        
     }
     
 

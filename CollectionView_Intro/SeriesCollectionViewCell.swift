@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LostCollectionViewCell: UICollectionViewCell {
+class SeriesCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemLabel: UILabel!
